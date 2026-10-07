@@ -72,15 +72,24 @@ billboard$wasItBritney[itsBritneyBih(billboard$artist)] <- "Yes"
 
 6. Use a for loop to determine if a song placed 50 or below or placed above 50 during the first week. 
 ```{r}
-
+billboard$top50<-NA
+for(i in 1:length(billboard$wk1)){
+  (billboard$top50[i] <- billboard$wk1[i]>=50)
+}
 ```
 
 7. Use an if else statement to determine the same information as you obtained with the for loop. 
 ```{r}
-
+billboard$top50WeekOne <- NA
+for (i in 1:nrow(billboard)) {
+  if(billboard$wk1[i]>=50){
+    billboard$top50WeekOne[i] <- "Top 50"
+  }
+  else{billboard$top50WeekOne[i] <- "Not Top 50"}
+}
 ```
 
 8. Compare your results in 6 and 7. 
 ```{r}
-
+table(billboard$top50, billboard$top50WeekOne)
 ```
