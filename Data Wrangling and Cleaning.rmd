@@ -22,12 +22,13 @@ Once you press okay, you'll see your dataset pop up in the console below. You sh
 
 ```{r}
 library(readr)
-aggressionDat <- read_csv("~/Downloads/PSY4802 Notes/PSY4802-AggressionSampleData.csv")
+aggressionDat <- read_csv("~/Downloads/PSY4802 Notes/PSY4802-AggressionSampleData.csv") ##less reproducible because it is using my personal directory
 View(aggressionDat)
 ```
 getting/setting wd
 ```{r}
-
+getwd()
+setwd("/Users/dseremet/Downloads/PSY4802 Notes/4802 Fall 26")
 ```
 
 ### Learning Outcome #1: Transform wide data to long
@@ -45,7 +46,11 @@ As mentioned above, the current data are in wide format. We can change this to l
 **pivot_longer**
 I think this is the easiest version to use. We'll need to use the "tidyverse" library. 
 ```{r}
+library(tidyverse)
+aggressionDatLong<- pivot_longer(aggressionDat, cols = c("baselineAggression", "postAggression"), names_to = "timePoint", values_to = "aggressionScores")
 
+##Using pipes for pivot_longer
+aggressionDatPipe<- aggressionDat |> pivot_longer(cols = c("baselineAggression", "postAggression"), names_to = "timePoint", values_to = "aggressionScores")
 ```
 `pivot_longer()` uses the following structure: 
 `pivot_longer(dataframe, columns containing wide data, names_to, values_to)`
@@ -59,12 +64,12 @@ values_to: specifies the name of the column where the scores go
 #### Learning Outcome 1 Practice
 1. Open the relig_income dataset.
 ```{r}
-
+data("relig_income")
 ```
 
 2. Restructure the dataset so that it is in long format. 
 ```{r}
-
+religionLong <- relig_income |> pivot_longer(cols = colnames(relig_income)[2:11], names_to = "incomeBracket", values_to = "frequency")
 ```
 
 **gather** 
@@ -74,29 +79,29 @@ key- what you'd like the column containing old column names to be called
 value- what you'd like the scores column to be called
 
 ```{r}
-
+aggressionDatLong2<- gather(aggressionDat, key = "timePoint", value = "AggressionScore", c("baselineAggression", "postAggression"))
 ```
 
 **melt**
 `melt()` is a function in the reshape2 library. It's another way to create long data
 ```{r}
-
+library(reshape2)
 ```
 `melt()` uses the following arguments: 
 `melt(dataframe, id.vars, measure.vars, variable.name, value.name)`
 ```{r}
-
+aggressionMeltLong<- melt(aggressionDat, id.vars = c("subjNo", "ageGroup", "parentReportGender", "condition"), measure.vars = c("baselineAggression", "postAggression"), variable.name = "timePoint",  value.name = "aggressionScore")
 ```
 
 ###practice: 
 
 1. open the billboard dataset. 
 ```{r}
-
+data("billboard")
 ```
 2. convert it from wide to long format. 
 ```{r}
-
+longBillboard <- billboard |> pivot_longer(cols = colnames(billboard)[4:79], names_to = "Week", values_to = "Rank", values_drop_na = TRUE)
 ```
 #### pipes! 
 ```{r}
