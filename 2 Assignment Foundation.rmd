@@ -90,6 +90,5 @@ for (i in 1:nrow(billboard)) {
 ```
 
 8. Compare your results in 6 and 7. 
-```{r}
-table(billboard$top50, billboard$top50WeekOne)
-```
+
+I get the same results for both. Top50 will show TRUE/FALSE, Top50WeekOne will show Top 50/Not Top 50. Top 50 always aligns with TRUE, Not Top 50 always aligns with FALSE.
