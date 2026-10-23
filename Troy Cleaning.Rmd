@@ -1,0 +1,51 @@
+---
+title: "Troy Cleaning"
+author: "Dejana Seremet"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r}
+library(readr)
+troyDat <- read_csv("~/Downloads/troyDat.csv")
+View(troyDat)
+```
+
+##Adding a location to the subject
+```{r}
+library(tidyverse)
+troyDat$location <- "University of Minnesota"
+```
+
+##Adding a subject number to each participants' response
+```{r}
+troyDat$subj <- (1:56)
+```
+
+```{r}
+troyDatNew <- troyDat %>%  relocate(subj, .before = age)
+```
+
+##Putting family income on a 1-12 scale
+```{r}
+library(dplyr)
+
+troyDatNew <- troyDatNew |>
+  mutate(
+    famIncome = case_match(
+      familyIncome,
+      "$10,000 or below"    ~ 1,
+      "$10,001-$20,000"   ~ 2,
+      "$20,001-$30,000"   ~ 3,
+      "$30,001-$40,000"   ~ 4,
+      "$40,001-$50,000"   ~ 5,
+      "$50,001-$60,000"   ~ 6,
+      "$60,001-$70,000"   ~ 7,
+      "$70,001-$80,000"   ~ 8,
+      "$80,001-$90,000"   ~ 9,
+      "$90,001-$100,000"  ~ 10,
+      "$100,001-$200,000" ~ 11,
+      "Above $200,000"      ~ 12
+    )
+  )
+```
