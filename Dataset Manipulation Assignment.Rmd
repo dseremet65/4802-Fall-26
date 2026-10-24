@@ -22,8 +22,6 @@ wideSleep <- sleep |> pivot_wider(id_cols= "ID", names_from = "group", values_fr
 4. Transform your data back to its original format. 
 ```{r}
 longSleep <- wideSleep |> pivot_longer(cols = c("1", "2"), names_to = "Group", values_to = "extraHours")
-
-aggressionDatPipe<- aggressionDat |> pivot_longer(cols = c("baselineAggression", "postAggression"), names_to = "timePoint", values_to = "aggressionScores")
 ```
 
 5. Open the Starwars dataset
@@ -57,7 +55,25 @@ summary(starwars$massKg)
 
 #Part 2
 10. open the billboard dataset.
+```{r}
+data("billboard")
+```
+
 11. are the data in this dataframe in long or wide format? explain how you know. 
+*Wide, it has a column for each week, and only one row per song.*
+
 12. change the data from its original format to the other version. 
+```{r}
+longBillboard <- billboard |> pivot_longer(cols = (4:79), names_to = "Week", values_to= "rank")
+```
+
 13. change it from your altered version in #3 back to its original state. 
+```{r}
+wideBillboard <- longBillboard |> pivot_wider(id_cols = c("artist", "track", "date.entered"), names_from = "Week", values_from = "rank")
+```
+
 14. Separate the date entered column into three columns: one for year, one for month, and one for day. 
+```{r}
+billboardNew <- billboard |> separate(date.entered, into = c("year", "month", "day"), sep = "-")
+billboardNew |> select(year, month, day)
+```
