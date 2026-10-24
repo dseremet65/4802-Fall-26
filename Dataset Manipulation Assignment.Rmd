@@ -49,7 +49,7 @@ starwars$massKg <- starwars %>% mutate(massKg = mass*2.21) %>% select(mass, mass
 
 9. Print a summary of your column from #8
 ```{r}
-summary(starwars$massKg)
+print(summary(starwars$massKg))
 ```
 
 
