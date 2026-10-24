@@ -51,7 +51,7 @@ starwars$massKg <- starwars %>% mutate(massKg = mass*2.21) %>% select(mass, mass
 ```{r}
 print(summary(starwars$massKg))
 ```
-
+*not sure if the print function makes a difference, output is the same with and without*
 
 #Part 2
 10. open the billboard dataset.
