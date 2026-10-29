@@ -1,0 +1,99 @@
+---
+title: "graphing comp"
+author: "Dejana Seremet"
+date: "10-28-26"
+output: html_document
+---
+```{r}
+darkTriad <- read_csv("~/Downloads/PSY4802 Notes/darkTriad_Data-1.csv")
+```
+
+##worst graph
+```{r}
+library(ggplot2)
+ggplot(darkTriad, aes(Psychopathy, Narcissism))+ geom_point(shape = 18, color = "#DEDEDE")+geom_smooth(method="lm", color = "#DEDEDE", linetype= "dotted", se = FALSE)+ labs(x= "", y = "") 
+```
+
+##best graph
+```{r}
+library(ggplot2)
+ggplot(darkTriad, aes(Psychopathy, Narcissism)) + geom_violin(fill = "#25452F") + geom_jitter(color="#B472C2", alpha = 0.02) + geom_boxplot(color="black",) + labs(title = "Psychopathy scores by Narcissism Score",
+        x = "Psychopathy Scores", y = "Narcissism Scores") +
+   theme(plot.title = element_text(face = "bold"))
+```
+
+worst graph
+```{r}
+ggplot(darkTriad, aes(Psychopathy, country)) + geom_violin(fill = "#25452F") + geom_jitter(color="#B472C2", alpha = 0.02) + geom_boxplot(color="black",) + labs(title = "scores",
+        x = "Psychopathy Scores", y = "County") +
+   theme_minimal(base_size = 13) +
+   theme(plot.title = element_text(face = "bold"))
+```
+
+```{r}
+ggplot(darkTriad, aes(Narcissism, Psychopathy)) +
+  geom_jitter(alpha = 0.1, color = "#B472C2") +
+  geom_smooth(method = "lm", color = "#25452F") +
+  theme_minimal(base_size = 13)
+
+cor.test(darkTriad$Narcissism, darkTriad$Psychopathy)
+```
+
+### animated plots in R
+```{r}
+library(gganimate)
+library(gapminder)
+
+head(gapminder)
+
+p <- ggplot(
+  data = gapminder,
+  aes(x = gdpPercap,
+      y = lifeExp,
+      size = pop,
+      colour = country)
+) + geom_point(show.legend = FALSE,
+               alpha = 0.5) +
+  scale_color_viridis_d() +
+  scale_size(range = c(2, 12)) + 
+  scale_x_log10() +
+  labs(x = "GDP per capita", y="life expectancy")
+
+finalplot<- p +
+  transition_time(time = year) +
+  labs(title = "Year : {frame time}") +
+  shadow_wake(wake_length = 0.1)
+
+anim <- animate(finalplot, renderer = gifski_renderer())
+   anim_save("my_animation.gif", anim)
+  
+```
+
+```{r}
+library(gganimate)
+
+head(penguins)
+
+G <- ggplot(
+  data = penguins,
+  aes(x = bill_len,
+      y = bill_dep,
+      size = body_mass,
+      colour = species)
+) + geom_point(show.legend = FALSE,
+               alpha = 0.5) +
+  scale_color_viridis_d() +
+  scale_size(range = c(2, 12)) + 
+  scale_x_log10() +
+  labs(x = "Bill Length", y="Bill Depth")
+
+finalplot<- G +
+  transition_time(time = year) +
+  labs(title = "Year : {frame time}") +
+  shadow_wake(wake_length = 0.1)
+
+anim <- animate(finalplot, renderer = gifski_renderer())
+   anim_save("my_animation.gif", anim)
+  
+```
+
