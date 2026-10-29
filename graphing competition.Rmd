@@ -77,8 +77,8 @@ head(penguins)
 G <- ggplot(
   data = penguins,
   aes(x = bill_len,
-      y = bill_dep,
-      size = body_mass,
+      y = body_mass,
+      size = bill_dep,
       colour = species)
 ) + geom_point(show.legend = FALSE,
                alpha = 0.5) +
