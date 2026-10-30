@@ -12,20 +12,45 @@ data(starwars)
 
 2. create a graph showing the frequency of eye colors in the dataset. 
 ```{r}
-
+library(ggplot2)
+ggplot(starwars, aes(eye_color))+geom_bar()
 ```
 
-
-3. Customize your graph to make it more presentable. Consider color, backgrounds, axes, etc. 
+3. Customize your graph to make it more presentable. Consider color, backgrounds, axes, etc.
+```{r}
+ ggplot(starwars, aes(eye_color))+geom_bar(fill="#9E5100", color="#8C4574")+ theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "none")
+```
 
 4. Create a graph displaying information about character's height in each homeworld. 
+```{r}
+ggplot(starwars, aes(homeworld, height))+geom_boxplot()
+```
 
 5. Customize your graph to make it more presentable. Consider color, backgrounds, axes, etc.
+```{r}
+starwars2 <- starwars %>% mutate(homeworld = fct_lump_min(homeworld, min = 3))
+
+ggplot(starwars2, aes(homeworld, height)) + geom_boxplot(fill = "#B1BDA2", color="#275C36") + theme(axis.text.x = element_text(angle = 45, hjust = 1)) + labs(x = "Homeworld", y = "Height (cm)", title = "Character height by homeworld")
+```
+*Looked up if it was possible to group together the smaller ones into one category, found a page that said to use mutate() with fct_lump_min(), used the help section of R too for lump_min*
 
 6. Create a graph of character's height by mass. 
+```{r}
+ggplot(starwars, aes(mass, height))+geom_point()
+```
 
 7.Customize your graph to make it more presentable. Consider color, backgrounds, axes, etc.
+```{r}
+ggplot(starwars, aes(mass, height)) +
+  geom_point(color = "#066C78", shape = 8) + labs(title = "Star Wars Characters: Height by Mass",x = "Mass (kg)", y = "Height (cm)")+geom_smooth(method="lm", linetype= "solid", color = "black") + theme_minimal()
+```
 
 8. Add gender as a third variable to your graph of height by mass. 
+```{r}
+ggplot(starwars, aes(mass, height, color= gender))+geom_point()
+```
 
 9. Customize your graph to make it more presentable. Consider color, backgrounds, axes, etc.
+```{r}
+ggplot(starwars, aes(mass, height, color = gender))+geom_point()+ labs(title = "Star Wars Characters: Height by Mass",x = "Mass (kg)", y = "Height (cm)")+geom_smooth(method="lm", linetype= "solid", se=FALSE)
+```
