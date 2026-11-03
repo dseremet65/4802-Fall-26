@@ -97,3 +97,8 @@ anim <- animate(finalplot, renderer = gifski_renderer())
   
 ```
 
+
+```{r}
+ggplot(darkTriad, aes(Narcissism, Psychopathy, color = as.factor(country)))+geom_point()
+```
+

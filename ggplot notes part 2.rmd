@@ -104,8 +104,9 @@ ggplot(diamonds, aes(color, price, color=cut))+geom_boxplot()+ facet_wrap(~cut, 
 ### Practice: 
 1) create a facet wrap graph to generate a scatterplot of mpg and hp based on the number of cylinders a car has
 ```{r}
+mtcars$cyl<- as.factor(mtcars$cyl)
 levels(mtcars$cyl) <- c("4 Cylinders", "6 Cylinders", "8 Cylinders")
-ggplot(mtcars, aes(mpg, hp, color=as.factor(cyl)))+geom_point()+facet_wrap(~cyl)
+ggplot(mtcars, aes(mpg, hp, color=cyl))+geom_point()+facet_wrap(~cyl)
 ```
 
 ### Learning Outcome 3: Explain how to export graphs
