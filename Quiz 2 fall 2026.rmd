@@ -9,16 +9,46 @@ output: html_document
 This quiz will focus on data frame manipulation, however, you may need to rely on skills you've learned in prior weeks. 
 
 1. load the starwars dataset from tidyverse
+```{r}
+library(tidyverse)
+data("starwars")
+```
 
 2. separate the films column so that there is one film in each column (don't worry about the "c(" and ) at the end for now)
+```{r}
+starwarsFilms <- starwars |> separate(films, into = c("film1", "film2", "film3", "film4", "film5", "film6", "film7"), sep = ", ")
 
+starwarsFilms |> select(name, film1, film2, film3, film4, film5, film6, film7)
+```
 
 3. alter the data from wide data to long data
+```{r}
+starwarsLong <- starwarsFilms |> pivot_longer(cols = c("film1", "film2", "film3", "film4", "film5", "film6", "film7"), names_to = "filmNumber", values_to = "film", values_drop_na = TRUE)
+```
 
 4. in the column where you stored the films, rename the levels so each film name is consistent (e.g. get rid of the "c(" and ")" )
+```{r}
+starwarsLong$film <- as.factor(starwarsLong$film)
+levels(starwarsLong$film)   # look at the order R prints them in
+
+levels(starwarsLong$film) <- c("Attack of the Clones", "Attack of the Clones", "Return of the Jedi", "Redturn of the Jedi", "Revenge of the Sith", "Revenge of the Sith", "The Empire Stricks Back", "The Force Awakens", "The Phantom Menace", "The Phantom Menace", "A New Hope", "Attack of the Clones", "A New Hope", "Attack of the Clones", "Return of the Jedi", "The Empire Stricks Back", "The Phantom Menace", "Return of the Jedi", "REvenge of the Sith", "The Empire Strikes Back", "The Force Awakens", "The Phantom Menace")
+
+levels(starwarsLong$film)
+starwarsLong |> select(name, filmNumber, film)
+```
 
 5. Create a column in your dataset that indicates whether a character was in the first starwars film, *Star Wars Episode IV: A New Hope* 
+```{r}
+
+```
 
 6. BMI is calculated as mass in Kg/height in meters squared. You currently have mass in Kg and height in cm. Create a column that contains each character's BMI. 
+```{r}
+
+```
 
 7. create a dataframe that contains only the name, hair color, and eye color for each character. 
+```{r}
+
+```
+

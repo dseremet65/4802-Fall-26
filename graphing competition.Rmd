@@ -22,13 +22,6 @@ ggplot(darkTriad, aes(Psychopathy, Narcissism)) + geom_violin(fill = "#25452F") 
    theme(plot.title = element_text(face = "bold"))
 ```
 
-worst graph
-```{r}
-ggplot(darkTriad, aes(Psychopathy, country)) + geom_violin(fill = "#25452F") + geom_jitter(color="#B472C2", alpha = 0.02) + geom_boxplot(color="black",) + labs(title = "scores",
-        x = "Psychopathy Scores", y = "County") +
-   theme_minimal(base_size = 13) +
-   theme(plot.title = element_text(face = "bold"))
-```
 
 ```{r}
 ggplot(darkTriad, aes(Narcissism, Psychopathy)) +
@@ -97,8 +90,48 @@ anim <- animate(finalplot, renderer = gifski_renderer())
   
 ```
 
+OG graph for what is below without any manipulation
+```{r}
+library(ggplot2)
+ggplot(darkTriad, aes(Narcissism, Machiavellianism)) +
+  geom_boxplot(aes(fill = country), alpha = 0.5) +
+  geom_jitter(aes(color = country), alpha = 0.05)
+```
+
+#Best Graph Day 2
+```{r}
+library(tidyverse)
+library(viridis)
+
+#Making country a factor
+class(darkTriad$country)
+darkTriad$country <- as.factor(darkTriad$country)
+#clumping groups of countries with less responses to make more readable
+TwodarkTriad <- darkTriad %>% mutate(country = fct_lump_min(country, min = 300))
+levels(TwodarkTriad$country) <- c("Australia", "Canada", "Great Britain", "United States", "Other", "NA")
+
+
+Ex <- ggplot(TwodarkTriad, aes(Narcissism, Machiavellianism)) +
+  geom_boxplot(aes(fill = country), alpha = 0.5) +
+  geom_jitter(aes(color = country), alpha = 0.05) +
+  scale_fill_viridis(discrete = TRUE, option = "viridis") +
+  scale_color_viridis(discrete = TRUE, option = "viridis")
+
+Ex + facet_wrap(~ country)+theme_classic()+ggtitle(label = "Narcissism and Machiavellianism Grouped by Country")+ xlab("Narcissism Scores")+ylab("Machiavellianism Scores")+theme(legend.position = "none", text = element_text(family = "Times New Roman", size=18)) + theme(plot.title = element_text(face="bold"))
+```
 
 ```{r}
-ggplot(darkTriad, aes(Narcissism, Psychopathy, color = as.factor(country)))+geom_point()
+ggsave("NarcissismBest.tiff", width = 10, height = 10, units = "in", dpi = 300)
+```
+
+
+worst graph
+```{r}
+ggplot(darkTriad, aes(Narcissism, country)) + geom_violin(fill = "#25452F") + geom_jitter(color="#B472C2", alpha = 0.9) + geom_boxplot(color="black",) + labs(title = "scores",
+        x = "Scores", y = "County")+theme(text = element_text( size=2))
+```
+
+```{r}
+ggsave("NarcissismWorst.tiff", width = 9, height = 1, units = "in", dpi = 300)
 ```
 
