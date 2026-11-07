@@ -4,7 +4,7 @@ author: "Dejana Seremet"
 date: "2026-10-07"
 output: html_document
 ---
-
+ 
 #Part 1
 1.Open the sleep dataset in R 
 ```{r}

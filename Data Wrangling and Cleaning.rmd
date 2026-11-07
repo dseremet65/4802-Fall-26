@@ -39,7 +39,7 @@ We also need to determine what type of data we have. To make sure we're all on t
 **Wide data:** There is only one row per participant. Each column represents a unique measurement. (in our example, the data is currently in wide format).
 
 Knowing the type of data you are using and how to change it is important because you may need to change it depending on the analyses you'd like to run and how you'd like to graph the data.  
-
+ 
 #### Wide to Long
 As mentioned above, the current data are in wide format. We can change this to long format a couple of ways. We're only going to go through the three that I see most often. As a warning, I'm starting with the easiest, and working my way down to the least intuitive. 
 

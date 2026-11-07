@@ -97,7 +97,7 @@ ggplot(darkTriad, aes(Narcissism, Machiavellianism)) +
   geom_boxplot(aes(fill = country), alpha = 0.5) +
   geom_jitter(aes(color = country), alpha = 0.05)
 ```
-
+ 
 #Best Graph Day 2
 ```{r}
 library(tidyverse)

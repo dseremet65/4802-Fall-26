@@ -3,7 +3,7 @@ title: "Quiz 2"
 author: "Amanda Mae Woodward"
 date: "2026-11-03"
 output: html_document
----
+--- 
 
 
 This quiz will focus on data frame manipulation, however, you may need to rely on skills you've learned in prior weeks. 
@@ -39,16 +39,25 @@ starwarsLong |> select(name, filmNumber, film)
 
 5. Create a column in your dataset that indicates whether a character was in the first starwars film, *Star Wars Episode IV: A New Hope* 
 ```{r}
+starwarsLong$firstFilm <- NA
 
+for (film in 1:nrow(starwarsLong)) {
+  if(starwarsLong$film[film] == "A New Hope"){
+   starwarsLong$firstFilm[film] <- "Present" 
+  }
+  else(starwarsLong$firstFilm[film]<-"Not Present")
+}
 ```
 
 6. BMI is calculated as mass in Kg/height in meters squared. You currently have mass in Kg and height in cm. Create a column that contains each character's BMI. 
 ```{r}
-
+starwars %>% 
+  mutate(heightM = height/100, BMI = mass/heightM^2) %>% select(name, mass, height, heightM, BMI)
 ```
 
 7. create a dataframe that contains only the name, hair color, and eye color for each character. 
 ```{r}
-
+characterColor <- starwars %>% 
+  select(name, hair_color, eye_color)
 ```
 

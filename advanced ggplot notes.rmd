@@ -4,7 +4,7 @@ author: "Amanda Mae Woodward"
 date: "2026-11-03"
 output: html_document
 ---
-
+ 
 For today's learning outcomes, we'll cover:
 - plotting an interaction 
 - Identify Code to create a shiny app 

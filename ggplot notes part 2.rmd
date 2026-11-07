@@ -108,7 +108,7 @@ mtcars$cyl<- as.factor(mtcars$cyl)
 levels(mtcars$cyl) <- c("4 Cylinders", "6 Cylinders", "8 Cylinders")
 ggplot(mtcars, aes(mpg, hp, color=cyl))+geom_point()+facet_wrap(~cyl)
 ```
-
+ 
 ### Learning Outcome 3: Explain how to export graphs
 to export graphs, I use the command `ggsave()`
 Specifically, you can use the following arguments: 
