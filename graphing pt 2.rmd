@@ -1,5 +1,5 @@
 ---
-title: "graphing part 2"
+title: "2 ggplot Assignment"
 author: "Amanda Mae Woodward"
 date: "2026-11-03"
 output: html_document
