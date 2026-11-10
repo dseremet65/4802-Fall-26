@@ -284,7 +284,7 @@ You may have noticed that writes levels of a factor in alphabetical order. Somet
 It has the general structure `relevel(column, reference level)`
 ```{r}
 levels(aggressionAnxietyDat$parentReportGender2)
-## girl is currentl the first category or reference category
+## girl is currently the first category or reference category
 aggressionAnxietyDat$parentReportGender2 <- relevel(aggressionAnxietyDat$parentReportGender2, ref = "boy")
 ```
 If you have more levels, you can specify the order in your factor function 
