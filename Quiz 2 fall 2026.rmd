@@ -17,11 +17,8 @@ data("starwars")
 2. separate the films column so that there is one film in each column (don't worry about the "c(" and ) at the end for now)
 ```{r}
 starwarsFilms <- starwars |> separate(films, into = c("film1", "film2", "film3", "film4", "film5", "film6", "film7"), sep = ", ")
-<<<<<<< HEAD
-=======
 
 starwarsFilms |> select(name, film1, film2, film3, film4, film5, film6, film7)
->>>>>>> f90b01fc71a3923d4728f1581f018df28d884b4b
 ```
 
 3. alter the data from wide data to long data
@@ -34,17 +31,15 @@ starwarsLong <- starwarsFilms |> pivot_longer(cols = c("film1", "film2", "film3"
 starwarsLong$film <- as.factor(starwarsLong$film)
 levels(starwarsLong$film)   # look at the order R prints them in
 
-<<<<<<< HEAD
 levels(starwarsLong$film) <- c("Attack of the Clones", "Attack of the Clones", "Return of the Jedi", "Return of the Jedi", "Revenge of the Sith", "Revenge of the Sith", "The Empire Strikes Back", "The Force Awakens", "The Phantom Menace", "The Phantom Menace", "A New Hope", "Attack of the Clones", "A New Hope", "Attack of the Clones", "Return of the Jedi", "The Empire Strikes Back", "The Phantom Menace", "Return of the Jedi", "Revenge of the Sith", "The Empire Strikes Back", "The Force Awakens", "The Phantom Menace") #write correct without "(c" and ")" in order that the levels prints it out, make sure to write everything in correct case and spelling that matches for all.
 
 levels(starwarsLong$film) #shows if there are spelling or case errors if there are repeats in film names
 starwarsLong |> select(name, filmNumber, film) #checking my work
-=======
+
 levels(starwarsLong$film) <- c("Attack of the Clones", "Attack of the Clones", "Return of the Jedi", "Redturn of the Jedi", "Revenge of the Sith", "Revenge of the Sith", "The Empire Stricks Back", "The Force Awakens", "The Phantom Menace", "The Phantom Menace", "A New Hope", "Attack of the Clones", "A New Hope", "Attack of the Clones", "Return of the Jedi", "The Empire Stricks Back", "The Phantom Menace", "Return of the Jedi", "REvenge of the Sith", "The Empire Strikes Back", "The Force Awakens", "The Phantom Menace")
 
 levels(starwarsLong$film)
 starwarsLong |> select(name, filmNumber, film)
->>>>>>> f90b01fc71a3923d4728f1581f018df28d884b4b
 ```
 
 5. Create a column in your dataset that indicates whether a character was in the first starwars film, *Star Wars Episode IV: A New Hope* 
@@ -69,9 +64,7 @@ starwars %>%
 ```{r}
 characterColor <- starwars %>% 
   select(name, hair_color, eye_color)
-<<<<<<< HEAD
+
 characterColor
-=======
->>>>>>> f90b01fc71a3923d4728f1581f018df28d884b4b
 ```
 
