@@ -84,3 +84,41 @@ data("mtcars")
 summary(glm(am ~ mpg, data = mtcars))
 ```
 
+#Linear mixed effects models/Repeated Measures ANOVA
+
+## repeated measures ANOVA
+repeated measures anova can be used when we have an outcome that is measured at multiple time points.
+```{r}
+data(sleep)
+a1 <- aov(extra ~ group + ID, data = sleep) #this would but not totally correct
+summary(a1)
+
+a2 <- aov(extra ~ group + Error(ID), data = sleep) #error ID allows us to say that there are variables that are due to random error and error due to repeated subjects
+summary(a2)
+```
+
+```{r}
+library(ez)
+ezANOVA(sleep, dv = extra, wid = ID, within = group)
+```
+
+##Linear mixed effects modeling
+
+```{r}
+library(lme4)
+library(lmerTest)
+```
+
+use `lmer()` to create mixed effect
+include `(Slope | Intercept)` in model
+- (1 | variable) indicates random intercept, where participants may have different starting points
+- if you replace the one with a second variable, it. indicates a random slope, were rate of change may differ across participants.
+```{r}
+data("ChickWeight")
+lmer1 <- lmer(weight ~ Diet + (Time|Chick), data = ChickWeight)
+summary(lmer1)
+```
+
+## Generalized linear mixed effect models (glmer)
+`glmer(DV ~ IV + (slope | intercept ), data = dataframe, family = "")
+-family options include binomial (dichotomous data) and poisson (count data) 
